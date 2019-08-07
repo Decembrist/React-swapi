@@ -33,13 +33,13 @@ export default class RandomPlanet extends Component {
         });
     };
 
-    updatePlanet() {
-        const id = Math.floor(Math.random() * 25) + 2;
+    updatePlanet = () => {
+        const id = Math.floor(Math.random() * 25) + 4;
 
         this.swapiService.getPlanet(id)
             .then(planet => this.onPlanetLoaded(planet))
             .catch(this.onError);
-    }
+    };
 
     render() {
         const {planet, loading, error} = this.state;
