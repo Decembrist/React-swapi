@@ -9,16 +9,18 @@ import './app.css';
 export default class App extends Component {
 
     state = {
-        selectedPerson: null
+        selectedPerson: 5
     };
 
     onPersonSelected = (id) => {
+        // console.log(id);
         this.setState({
             selectedPerson: id
         });
     };
 
     render() {
+        // console.log('render');
         return (
             <div className="container">
                 <Header/>

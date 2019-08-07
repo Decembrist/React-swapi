@@ -42,12 +42,6 @@ export default class SwapiService {
         return this._transformPlanet(planet);
     }
 
-    _extractId(planet) {
-        const idRegExp = /\/([0-9]*)\/$/;
-
-        return planet.url.match(idRegExp)[1];
-    }
-
     _transformPlanet = (planet) => {
         return {
             id: this._extractId(planet),
@@ -81,4 +75,10 @@ export default class SwapiService {
             cargoCapacity: starship.cargoCapacity
         }
     };
+
+    _extractId(planet) {
+        const idRegExp = /\/([0-9]*)\/$/;
+
+        return planet.url.match(idRegExp)[1];
+    }
 }
