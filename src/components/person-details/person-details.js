@@ -7,7 +7,8 @@ import Loader from "../loader";
 export default class PersonDetails extends Component {
 
     state = {
-        person: null
+        person: null,
+        loader: true
     };
 
     swapi = new SwapiService();
@@ -15,14 +16,15 @@ export default class PersonDetails extends Component {
     updatePerson = () => {
         const {personId} = this.props;
 
+        this.setState({loader: true});
+
         if (!personId) {
             return;
         }
 
         this.swapi.getPerson(personId)
             .then((person) => {
-                console.log(person);
-                this.setState({person})
+                this.setState({person, loader: false})
             })
     };
 
@@ -38,7 +40,7 @@ export default class PersonDetails extends Component {
 
     render() {
 
-        const {person} = this.state;
+        const {person, loader} = this.state;
 
         if (!person) {
             return <Loader/>;
@@ -46,13 +48,13 @@ export default class PersonDetails extends Component {
 
         const {id, name, gender, birthYear, eyeColor} = person;
 
-        console.log(person);
         return (
             <div className="person-details card">
-                <img className="person-image"
-                     src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}/>
+                {loader && <Loader/>}
+                {!loader && <img className="person-image"
+                     src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt={name}/>}
 
-                <div className="card-body">
+                {!loader && <div className="card-body">
                     <h4>{name}</h4>
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">
@@ -68,7 +70,7 @@ export default class PersonDetails extends Component {
                             <span>{eyeColor}</span>
                         </li>
                     </ul>
-                </div>
+                </div>}
             </div>
         )
     }

@@ -14,8 +14,15 @@ export default class RandomPlanet extends Component {
         error: false
     };
 
+    idInterval = null;
+
     componentDidMount() {
         this.updatePlanet();
+        this.idInterval = setInterval(()=> this.updatePlanet(), 2500);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.idInterval);
     }
 
     swapiService = new SwapiService();
