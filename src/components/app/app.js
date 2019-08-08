@@ -20,10 +20,6 @@ export default class App extends Component {
                     renderItems={({name, gender}) => `${name} (${gender})`}
                     getData={this.SWApi.getAllPeople}
                 />
-                <PeoplePage
-                    renderItems={({name}) => <span>{name}&nbsp;&nbsp;<button>!</button></span>}
-                    getData={this.SWApi.getAllPlanets}
-                />
 
             </div>
         );

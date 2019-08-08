@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ItemList from "../item-list";
 import PersonDetails from "../person-details";
 import ErrorIndicator from "../error";
+import Row from "../row";
 
 export default class PeoplePage extends Component {
 
@@ -26,19 +27,15 @@ export default class PeoplePage extends Component {
             return <ErrorIndicator />
         }
 
-        return (
-            <div className="row mb2">
-                <div className="col-md-6">
-                    <ItemList
-                        getData={this.props.getData}
-                        renderItems={this.props.renderItems}
-                        onItemSelected={this.onPersonSelected}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <PersonDetails personId={this.state.selectedItem}/>
-                </div>
-            </div>
-        )
+        const itemList = <ItemList
+            getData={this.props.getData}
+            renderItems={this.props.renderItems}
+            onItemSelected={this.onPersonSelected}
+        />;
+
+        const personDetail = <PersonDetails personId={this.state.selectedItem}/>;
+
+        return <Row left={itemList} right={personDetail}/>
+
     }
 }
