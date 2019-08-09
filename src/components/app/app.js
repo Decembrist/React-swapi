@@ -6,9 +6,11 @@ import PeoplePage from "../people-page";
 
 
 export default class App extends Component {
+    test = () => {
 
-
+    };
     render() {
+        this.test();
         return (
             <div className="container">
                 <Header/>
