@@ -1,49 +1,27 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import './item-list.css';
-import Loader from "../loader";
 
-export default class ItemList extends Component {
-
-    state = {
-        ItemList: null
-    };
-
-    componentDidMount() {
-        this.props.getData()
-            .then(ItemList => {
-                this.setState({ItemList})
-            })
-    }
-
-    renderItems = (arr) => {
-        return arr.map((item) => {
-            const {id} = item;
-
-            const label = this.props.children(item);
-
-            return (
-                <li className="list-group-item"
-                    key={id}
-                    onClick={() => this.props.onItemSelected(id)}>
-                   {label}
-                </li>
-            );
-        });
-    };
-
-    render() {
-
-        const {ItemList} = this.state;
-
-        if(!ItemList) {
-            return <Loader />;
-        }
+const ItemList = (props) => {
+    const {data, onItemSelect} = props;
+    const items = data.map((item) => {
+        const {id} = item;
 
         return (
-            <ul className="item-list list-group">
-                {this.renderItems(ItemList).slice(0, 5)}
-            </ul>
+            <li className="list-group-item"
+                key={id}
+                onClick={() =>{onItemSelect(id)}}>
+                {item.name}
+            </li>
         );
-    }
-}
+    });
+
+    return (
+        <ul className="item-list list-group">
+            {items.slice(0, 5)}
+        </ul>
+    );
+};
+
+
+export default ItemList;

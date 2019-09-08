@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import Loader from "../../components/loader";
-import ErrorIndicator from "../../components/error";
 
-const WrapperData = (wrappedComponent, getData) => {
+const WrapperData = (WrappedComponent, getData) => {
     return class extends Component {
 
         state = {
@@ -17,7 +16,12 @@ const WrapperData = (wrappedComponent, getData) => {
         }
 
         render() {
-            return <wrappedComponent {...this.props} />
+            const {data} = this.state;
+            if(!data) {
+                return <Loader/>
+            }
+
+            return <WrappedComponent {...this.props} data={data} />
         }
     }
 };

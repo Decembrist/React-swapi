@@ -83,11 +83,11 @@ export default class SwapiService {
     };
 
     getStarshipImage = ({id}) => {
-        return `${this._urlImage}/planets/${id}.jpg`
+        return `${this._urlImage}/starships/${id}.jpg`
     };
 
     getPlanetImage = ({id}) => {
-        return `${this._urlImage}/starships/${id}.jpg`
+        return `${this._urlImage}/planets/${id}.jpg`
     };
 
 

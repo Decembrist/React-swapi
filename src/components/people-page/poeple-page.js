@@ -5,6 +5,7 @@ import ErrorIndicator from "../error";
 import Row from "../row";
 import SwapiService from "../../servises/swapi-service";
 import ErrorBoundry from "../error-baundry";
+import WrapperData from "../../hoc-helper/wrapper-data/wrapper-data";
 
 export default class PeoplePage extends Component {
 
@@ -21,20 +22,17 @@ export default class PeoplePage extends Component {
         });
     };
 
+    onGetList = () => {
+        return
+    };
+
     render() {
 
         if(this.state.hasError){
             return <ErrorIndicator />
         }
 
-        const itemList = (<ItemList
-            getData={this.SWApi.getAllPeople}
-            renderItems={({name, gender}) => `${name} (${gender})`}
-            onItemSelected={this.onPersonSelected}
-        >
-            {(i) => `${i.name} ${i.birthYear}`}
-        </ItemList>);
-
+        const WpItemList = WrapperData(ItemList, this.SWApi.getAllPeople);
         const personDetail = (
             <ErrorBoundry>
                 <ItemDetails
@@ -50,7 +48,7 @@ export default class PeoplePage extends Component {
         );
 
         return (
-            <Row left={itemList} right={personDetail}/>
+            <Row left={<WpItemList onPersonSelected={this.onPersonSelected}>{({name})=>name}</WpItemList>} right={personDetail}/>
         )
 
     }
